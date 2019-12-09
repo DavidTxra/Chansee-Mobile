@@ -84,9 +84,9 @@ const AppTabNavigator = createBottomTabNavigator(
 )
 
 const AuthStack = createStackNavigator({
-  Login: LoginScreen,
-  Register: RegisterScreen
-});
+    Login: LoginScreen,
+    Register: RegisterScreen
+  });
 
 export default createAppContainer(
   createSwitchNavigator(
