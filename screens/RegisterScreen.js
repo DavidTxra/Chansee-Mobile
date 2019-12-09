@@ -1,49 +1,14 @@
-// import React from 'react';
-// import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-// import * as firebase from 'firebase'
-
-// export default class RegisterScreen extends React.Component {
-//     state = {
-//         email: "",
-//         displayName: ""
-//     }
-
-//     componentDidMount() {
-//         const { email, displayName } = firebase.auth().currentUser;
-
-//         this.setState({ email, displayName });
-//     }
-
-//     signOutUser = () => {
-//         firebase.auth().signOut();
-//     };
-
-//     render() {
-//         return (
-//             <View style={styles.container}> 
-//                 <Text>Hi {this.state.email}!</Text>
-
-//                 <TouchableOpacity style={{marginTop: 32}} onPress={this.signOutUser}>
-//                     <Text>Logout</Text>
-//                 </TouchableOpacity>
-//             </View>
-//         );
-//     }
-// }
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         justifyContent: "center",
-//         alignItems: "center"
-//     }
-// });
-
 import React from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import * as firebase from 'firebase'
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar } from 'react-native';
+import {Ionicons} from '@expo/vector-icons';
+import * as firebase from 'firebase';
 
 export default class RegisterScreen extends React.Component {
+    
+    static navigationOptions = {
+        header:null
+    };
+    
     state = {
         name: "",
         email: "",
@@ -65,8 +30,30 @@ export default class RegisterScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}> 
+            <View style={styles.container}>
+
+                <StatusBar borStyle="light-content"></StatusBar>
+
+                <Image 
+                    source={require('../assets/stade.png')} 
+                    style={{marginTop:-110,marginLeft:0,opacity:0.7}}
+                ></Image>
+
+                <TouchableOpacity style={styles.back} onPress={() => this.props.navigation.goBack()}>
+                    <Ionicons name="ios-arrow-round-back" size={32} color="#FFF"></Ionicons>    
+                </TouchableOpacity>  
+
+            <View style={{position:"absolute",top:64,alignItems:"center",width:"100%"}}>
                 <Text style={styles.greeting}>{`Inscription`}</Text>
+                <TouchableOpacity style={styles.avatar}>
+                    <Ionicons 
+                        name="ios-add" 
+                        size={40} 
+                        color="#FFF"
+                        style={{marginTop:6,marginLeft:2}}
+                    ></Ionicons>    
+                </TouchableOpacity> 
+            </View>
 
                 <View style={styles.errorMessage}>
                     {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
@@ -143,7 +130,7 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     form: {
-        marginBottom: 48,
+        marginBottom: 58,
         marginHorizontal: 30
     },
     inputTitle: {
@@ -166,6 +153,25 @@ const styles = StyleSheet.create({
         height: 52,
         alignItems: "center",
         justifyContent: "center"
-
+    },
+    back: {
+        position: "absolute",
+        top:48,
+        left:32,
+        width:32,
+        height:32,
+        borderRadius:16,
+        backgroundColor:"rgba(21,22,48,0.1)",
+        alignItems:"center",
+        justifyContent:"center"
+    },
+    avatar: {
+        width:100,
+        height:100,
+        borderRadius:50,
+        backgroundColor:"#E1E2E6",
+        marginTop:48,
+        justifyContent:"center",
+        alignItems:"center"
     }
 });

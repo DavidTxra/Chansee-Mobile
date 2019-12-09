@@ -1,8 +1,13 @@
 import React from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar } from 'react-native';
 import * as firebase from 'firebase'
 
 export default class LoginScreen extends React.Component {
+    
+    static navigationOptions = {
+        header:null
+    };
+    
     state = {
         email: "",
         password: "",
@@ -20,8 +25,15 @@ export default class LoginScreen extends React.Component {
 
     render() {
         return (
-            <View style={styles.container}> 
-                <Text style={styles.greeting}>{`Chansee`}</Text>
+            <View style={styles.container}>
+
+                <StatusBar borStyle="light-content"></StatusBar>
+
+                <Image 
+                    source={require('../assets/logo.png')} 
+                    style={{marginTop:110,alignSelf:"center"}}
+                ></Image> 
+               { /* <Text style={styles.greeting}>{`Chansee`}</Text> */ }
 
                 <View style={styles.errorMessage}>
                     {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
