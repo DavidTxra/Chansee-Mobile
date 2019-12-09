@@ -1,84 +1,42 @@
-// On importe les components nécessaires.
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack'; 
+import {createAppContainer, createSwitchNavigator} from 'react-navigation'
+import {createStackNavigator} from 'react-navigation-stack'
+import LoadingScreen from './screens/LoadingScreen'
+import LoginScreen from './screens/LoginScreen'
+import RegisterScreen from './screens/RegisterScreen'
+import HomeScreen from './screens/HomeScreen'
 
+import * as firebase from 'firebase'
 
+var firebaseConfig = {
+  apiKey: "AIzaSyBm8Ip1gjY_6BvyBy59PtwXCvKCpTFVwRo",
+  authDomain: "chansee-43c82.firebaseapp.com",
+  databaseURL: "https://chansee-43c82.firebaseio.com",
+  projectId: "chansee-43c82",
+  storageBucket: "chansee-43c82.appspot.com",
+  messagingSenderId: "2094531129",
+  appId: "1:2094531129:web:65ce818e7a6e8223dac3e8"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-
-class HomeScreen extends React.Component {
-  render() {
-    const {navigate} = this.props.navigation;
-    return (
-      <View style={styles.container}>
-        <Text style={{color: 'white', fontSize: 40, marginTop: -100}}>Chansee</Text>
-        <Button
-          title="Joueur "
-          onPress={() => navigate('Joueur', {name: 'Joueur'})} //On nous redirige vers la page joueur
-        />
-
-        <Button
-          title="Club "
-          onPress={() => navigate('Club', {name: 'Club'})} //On nous redirige vers la page club
-        />
-    </View>
-    );
-  }
-}
-
-
-class JoueurScreen extends React.Component {
-  static navigationOptions = {
-    title: ' ',
-  };
-  render() {
-    const {navigate} = this.props.navigation;
-    return (
-      <View style={styles.container}>
-        <Text style={{color: 'white', fontSize: 40, textAlign: 'center',}}>Vous avez choisi Joueur</Text>
-      </View>
-     
-    );
-  }
-}
-
-class ClubScreen extends React.Component {
-  static navigationOptions = {
-    title: ' ',
-  };
-  render() {
-    const {navigate} = this.props.navigation;
-    return (
-      <View style={styles.container}>
-        <Text style={{color: 'white', fontSize: 40, textAlign: 'center',}}>Vous avez choisi Club</Text>
-      </View>
-     
-    );
-  }
-}
-
-
-
-
-const MainNavigator = createStackNavigator({
-  Home: {screen: HomeScreen},
-  Joueur: {screen: JoueurScreen},
-  Club: {screen: ClubScreen},
+const AppStack = createStackNavigator({
+  Home: HomeScreen
 });
 
-const App = createAppContainer(MainNavigator);
-
-export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'green',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  
+const AuthStack = createStackNavigator({
+  Login: LoginScreen,
+  Register: RegisterScreen
 });
+
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      Loading: LoadingScreen,
+      App: AppStack,
+      Auth: AuthStack
+    },
+    {
+      initialRouteName: "Loading"
+    }
+  )
+);
