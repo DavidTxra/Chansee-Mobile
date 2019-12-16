@@ -3,7 +3,7 @@ import * as Permissions from 'expo-permissions'
 
 class UserPermissions {
     getCameraPermission = async () => {
-        if(Constants.plateform.ios) {
+        if(Constants.platform.ios) {
             const {status} = await Permissions.askAsync(Permissions.CAMERA_ROLL)
 
             if(status != "granted") {
