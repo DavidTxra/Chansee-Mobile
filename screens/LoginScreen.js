@@ -1,8 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, Image, StatusBar, LayoutAnimation } from 'react-native';
 import * as firebase from 'firebase'
 
 export default class LoginScreen extends React.Component {
+    static navigationOptions = {
+        header: null
+    };
     state = {
         email: "",
         password: "",
@@ -21,7 +24,9 @@ export default class LoginScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}> 
-                <Text style={styles.greeting}>{`Chansee`}</Text>
+                <StatusBar barStyle="light-content"></StatusBar>
+                <Image source={require("../logo_chansee_v1.png")} style={{marginTop: 140, alignSelf: "center"}}></Image>
+                {/* <Text style={styles.greeting}>{`Chansee`}</Text> */}
 
                 <View style={styles.errorMessage}>
                     {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
@@ -59,7 +64,7 @@ export default class LoginScreen extends React.Component {
                     onPress={() => this.props.navigation.navigate("Register")}
                 >
                     <Text style={{ color: "#414959", fontSize: 13 }}>
-                        Pas encore de la famille ? <Text style={{fontWeight: "500", color: "green"}}>Inscris-toi ici </Text>
+                        Pas encore de la famille ? <Text style={{fontWeight: "500", color: "#3BD1B3"}}>Inscris-toi ici </Text>
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -69,7 +74,8 @@ export default class LoginScreen extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+        
     },
     greeting: {
         marginTop: 32,
@@ -108,7 +114,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginHorizontal: 30,
-        backgroundColor: "green",
+        backgroundColor: "#3BD1B3",
         borderRadius: 4,
         height: 52,
         alignItems: "center",

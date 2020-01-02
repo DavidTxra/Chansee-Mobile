@@ -40,14 +40,30 @@
 // });
 
 import React from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import * as firebase from 'firebase'
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Statusbar } from 'react-native';
+import * as firebase from 'firebase';
+import {Ionicons} from '@expo/vector-icons';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+
+
+var choix = [
+    {label: "Joueur", value: 0},
+    {label: "Club", value: 1},
+];
 
 export default class RegisterScreen extends React.Component {
+    static navigationOptions = {
+        header: null
+        
+    };
+
+    
+
     state = {
         name: "",
         email: "",
         password: "",
+        // choix:"",
         errorMessage: null
     };
 
@@ -55,6 +71,7 @@ export default class RegisterScreen extends React.Component {
         firebase
             .auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
+            // .then(this.state.choix.updateIsActiveIndex(0))
             .then(userCredentials => {
                 return userCredentials.user.updateProfile({
                    displayName: this.state.name 
@@ -63,9 +80,18 @@ export default class RegisterScreen extends React.Component {
             .catch(error => this.setState({ errorMessage: error.message }))
     };
 
+
+    
+
     render() {
+        
         return (
+            
             <View style={styles.container}> 
+                <TouchableOpacity style={styles.back} onPress={() => this.props.navigation.goBack()}>
+                    <Ionicons name="ios-arrow-round-back" size={32} color="#FFF"></Ionicons>
+                </TouchableOpacity>
+                {/* <Image source={require("../logo_chansee_v1.png")} style={{marginTop: 90, alignSelf: "center"}}></Image> */}
                 <Text style={styles.greeting}>{`Inscription`}</Text>
 
                 <View style={styles.errorMessage}>
@@ -103,8 +129,26 @@ export default class RegisterScreen extends React.Component {
                             value={this.state.password}
                         ></TextInput>
                     </View>
-                </View>
 
+                    <View style={{ marginTop: 32 }}>
+                        <RadioForm style={styles.boutonRadio}
+                           radio_props={choix} 
+                           onPress={(value) => {}}
+                           buttonSize={15}
+                           selectedButtonColor={'#3BD1B3'}
+                           
+                           labelColor={"#8A8F9E"}
+                           fontSize={10}
+                           textTransform={"uppercase"}
+                           formHorizontal={true}
+                           buttonColor={'#3BD1B3'}
+                           labelStyle={{left: -9}}
+                           value={this.state.choix} 
+                        />
+                    </View>
+                </View>
+             
+                
                 <TouchableOpacity style={styles.button} onPress={this.handleSignUp}>
                     <Text style={{color: "#FFF", fontWeight: "500"}}>S'inscrire  </Text>
                 </TouchableOpacity>
@@ -125,10 +169,10 @@ const styles = StyleSheet.create({
         flex: 1
     },
     greeting: {
-        marginTop: 32,
         fontSize: 35,
         fontWeight: "400",
-        textAlign: "center"
+        textAlign: "center",
+        marginTop: 160, 
     },
     errorMessage: {
         height: 72,
@@ -151,6 +195,19 @@ const styles = StyleSheet.create({
         fontSize: 10,
         textTransform: "uppercase"
     },
+
+
+
+    boutonRadio: {
+        fontSize: 35,
+        fontWeight: "400",
+        textAlign: "center",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+
+
+
     input: {
         borderBottomColor: "#8A8F9E",
         borderBottomWidth: StyleSheet.hairlineWidth,
@@ -161,11 +218,22 @@ const styles = StyleSheet.create({
     },
     button: {
         marginHorizontal: 30,
-        backgroundColor: "green",
+        backgroundColor: "#3BD1B3",
         borderRadius: 4,
         height: 52,
         alignItems: "center",
         justifyContent: "center"
 
+    },
+    back: {
+        position: "absolute",
+        top: 48,
+        left: 32,
+        width: 32,
+        height: 32,
+        borderRadius: 16,
+        backgroundColor: "rgba(21, 22, 48, 0.1)",
+        alignItems: "center",
+        justifyContent: "center"
     }
 });
