@@ -9,4 +9,4 @@ Application mobile en React Native - DevLab
 
 4. Faites: npm install
 
-5. Pour lancer l'application, faites : expo start --android
+5. Pour lancer l'application, faites : expo start
