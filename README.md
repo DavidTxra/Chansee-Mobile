@@ -1,14 +1,16 @@
 # Chansee-Mobile
 Application mobile en React Native - DevLab
 
-1. Avoir installé au préalable la dernière version de NodeJS et React Native.
+1. Installer la dernière version de NodeJS : npm-windows-upgrade --npm-version latest
 
-2. Installer expo : npm install -g expo-cli
+2. Installer React Native : npm install -g react-native-cli
 
-3. Clone le repository.
+3. Installer expo : npm install -g expo-cli
 
-4. Ouvrez le terminal et allez dans votre dossier.
+4. Clone le repository.
 
-5. Faites: npm install
+5. Ouvrez le terminal et allez dans votre dossier.
 
-6. Pour lancer l'application, faites : expo start
+6. Faites: npm install
+
+7. Pour lancer l'application, faites : expo start
