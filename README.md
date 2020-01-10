@@ -7,6 +7,8 @@ Application mobile en React Native - DevLab
 
 3. Ouvrez le terminal et allez dans votre dossier.
 
-4. Faites: npm install
+4. Installer expo : npm install -g expo-cli
 
-5. Pour lancer l'application, faites : expo start
+5. Faites: npm install
+
+6. Pour lancer l'application, faites : expo start
