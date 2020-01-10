@@ -7,7 +7,7 @@ Application mobile en React Native - DevLab
 
 3. Installer expo : npm install -g expo-cli
 
-4. Clone le repository.
+4. Clone la branch dev du repository.
 
 5. Ouvrez le terminal et allez dans votre dossier.
 
